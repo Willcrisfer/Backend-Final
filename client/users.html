@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2>Register New User</h2>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name" required />
+          <div id="nameError" class="text-danger"></div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" required />
+          <div id="emailError" class="text-danger"></div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" required />
+          <div id="passwordError" class="text-danger"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+      <hr />
+      <h2>User List</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody id="userList"></tbody>
+      </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      async function fetchUsers() {
+        const response = await fetch("http://localhost:3333/auth/users");
+        const users = await response.json();
+        const userList = document.getElementById("userList");
+        userList.innerHTM = "";
+
+        users.forEach((user) => {
+          const row = `<tr>
+              <td>${user.id}</td>
+              <td>${user.name}</td>
+              <td>${user.email}</td>
+            </tr>`;
+
+          userList.innerHTML += row;
+        });
+      }
+      fetchUsers();
+
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          console.log(
+            JSON.stringify({
+              name,
+              email,
+              password,
+            })
+          );
+
+          const response = await fetch("http://localhost:3333/auth/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              password,
+            }),
+          });
+
+          if (response.ok) {
+            alert("User registered with success!");
+            fetchUsers();
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("password").value = "";
+          } else {
+            const data = await response.json();
+            console.log("Error registering user:", data.errors);
+          }
+        });
+    </script>
+  </body>
+</html>

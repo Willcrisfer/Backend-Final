@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product List</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <style>
+      .product-image {
+        height: 250px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: white;
+      }
+      .product-card {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        margin-bottom: 30px;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2 class="mb-4">Products</h2>
+      <div id="products" class="row">
+        <div class="col-md-4 col-sm-12">
+          <div class="card product-card">
+            <div
+              class="product-image"
+              style="
+                background-image: url();
+              "
+            ></div>
+            <div class="card-body">
+              <h5>Product XPTO</h5>
+   
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      async function fetchProducts() {
+        const response = await fetch("http://localhost:3333/api/products");
+        const products = await response.json();
+        const productsContainer = document.getElementById("products");
+        productsContainer.innerHTML = "";
+        products.forEach((product) => {
+          const productCard = `<div class="col-md-4 col-sm-12">
+            <div class="card product-card">
+              <div class="product-image" style="background-image: url(http://localhost:3333/${product.image})"></div>
+              <div class="card-body">
+                <h5>${product.title}</h5>
+                <p>${product.description}</p>
+                <p>Price: ${product.price}</p>
+                <p>Category: ${product.category}</p>
+              </div>
+            </div>
+          </div>`;
+          productsContainer.innerHTML += productCard;
+        });
+      }
+      fetchProducts();
+    </script>
+  </body>
+</html>

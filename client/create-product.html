@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Product</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h2 class="mb-4">Create Product</h2>
+      <form id="createProductForm">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" required />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea
+            class="form-control"
+            id="description"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" class="form-control" id="price" required />
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input type="text" class="form-control" id="category" required />
+        </div>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input
+            type="file"
+            class="form-control-file"
+            id="image"
+            accept="image/*"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Create Product</button>
+      </form>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      document
+        .getElementById("createProductForm")
+        .addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const title = document.getElementById("title").value;
+          const description = document.getElementById("description").value;
+          const price = document.getElementById("price").value;
+          const category = document.getElementById("category").value;
+          const image = document.getElementById("image").files[0];
+
+          const formData = new FormData();
+          formData.append("title", title);
+          formData.append("description", description);
+          formData.append("price", price);
+          formData.append("category", category);
+          formData.append("image", image);
+
+          const response = await fetch("http://localhost:3333/api/products", {
+            method: "POST",
+            body: formData,
+          });
+          if (response.ok) {
+            alert("Product created successfully");
+            document.getElementById("createProductForm").reset();
+          }
+        });
+    </script>
+  </body>
+</html>

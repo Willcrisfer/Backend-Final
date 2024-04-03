@@ -1,0 +1,28 @@
+[
+  {
+    "title": "Willian Fernandese",
+    "description": "dasdasd",
+    "price": "123",
+    "category": "Carne",
+    "id": 1,
+    "image": "a7ccf2c5-df4b-4793-8a5e-178f9a26edd9.jpeg"
+  },
+  {
+    "title": "Cadeira",
+    "description": "Uma Cadeira",
+    "price": "12",
+    "category": "Casa",
+    "id": 2,
+    "image": "bfb628ce-c424-4a90-b683-20c54054fecf.png"
+  },
+  {
+    "title": "Carro",
+    "description": "Esse é meu carro",
+    "price": "123312",
+    "category": "teeste",
+    "id": 3,
+    "image": "f8f10da4-62cb-4d83-9df7-8f49e3ccaf3b.jpeg"
+  }
+
+
+]
