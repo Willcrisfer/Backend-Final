@@ -64,4 +64,4 @@ export default function setupSwagger(app: Express) {
 }
 
 
-// caminho para se conectar ao Swagger: http://localhost:3333/api-docs
+// Caminho para se conectar ao Swagger: http://localhost:3333/api-docs
