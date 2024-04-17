@@ -103,21 +103,13 @@ class MovieController {
           { genres: regex }
         ]
       };
-  
-      // Adiciona a condição de ano à consulta, se fornecido
-      // if (year) {
-      //   filter.year = year;
-      // }
       
-      // Adiciona a condição de gênero ao filtro, se fornecido
-      if (genres) {
-        filter.genres = genres;
-      }
+      // Adiciona a condição de gênero,titulo e ano ao filtro, se fornecido
+      if (genres) {filter.genres = genres;}
+      if (title) { filter.title = title;}
+      // if (year) {filter.year = year;}
 
-      // Adiciona a condição de tiulo ao filtro, se fornecido
-      if (title) {
-        filter.title = title;
-      }
+
       // Busca filmes que correspondam aos critérios de pesquisa
       const movies = await MovieModel
         .find(filter)

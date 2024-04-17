@@ -19,7 +19,7 @@ import mongoose from "mongoose";
  *        trailerLink:
  *          type: string
  *        year:
- *          type: string
+ *          type: number
  *        genres:
  *          type: array
  *      
