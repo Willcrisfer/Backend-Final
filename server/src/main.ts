@@ -1,12 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import productsRouter from './routers/productsRouter.js'
+import moviesRouter from './routers/moviesRouter.js'
 import usersRouter from './routers/usersRouter.js'
 import cors from 'cors'
 import fileUpload from "express-fileupload";
 import bodyParser from "body-parser";
-import mongoose, { mongo } from 'mongoose';
+import mongoose  from 'mongoose';
 import setupSwagger from './docs/swagger.js';
+
 dotenv.config();
 
 const MONGO_URI = process.env.MONGO_URI || "";
@@ -20,7 +21,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 
-app.use('/api', productsRouter);
+app.use('/api', moviesRouter);
 app.use('/auth', usersRouter);
 const PORT = process.env.PORT || 3000;
 
