@@ -7,6 +7,14 @@ const router = Router();
 
 /**
  * @swagger
+ * tags:
+ *  name: Movies
+ *  description: API para gerenciamento de Filmes
+ */
+
+
+/**
+ * @swagger
  * /api/movies:
  *   get:   
  *     summary: Get all Movies
