@@ -62,3 +62,6 @@ export default function setupSwagger(app: Express) {
   const specs = swaggerJsdoc(options)
   app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs))
 }
+
+
+// caminho para se conectar ao Swagger: http://localhost:3333/api-docs
